@@ -68,7 +68,43 @@ public class TaskManager {
 
     public static void addTask() {
         System.out.println("add");
-        System.out.println("dodaaje taska");
+
+        String[] task = new String[3];
+        String description;
+        String date;
+        String isImportant;
+
+
+        Scanner sc = new Scanner(System.in);
+
+
+        while (true) {
+            System.out.println("Please add task description. Please do not use comma");
+            description = sc.nextLine();
+            if (description != null && !description.matches(",")) {
+                break;
+            }
+
+        }
+        while (true) {
+            System.out.println("Please add task due date. Use format yyyy-mm-dd");
+            date = sc.nextLine();
+            if (date != null && date.matches("\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])*")) {
+                task[1] = date;
+                break;
+            }
+        }
+
+        while (true) {
+            System.out.println("Is your task important: true/false");
+            isImportant = sc.nextLine();
+
+            if ("true".equals(isImportant) || "false".equals(isImportant)) {
+                task[2] = isImportant;
+                break;
+            }
+        }
+        System.out.println(description + " " + date + " " + isImportant);
     }
 
     public static String[][] removeTask(String[][] array) {
