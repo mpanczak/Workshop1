@@ -28,7 +28,7 @@ public class TaskManager {
             String command = sc.nextLine();
             switch (command) {
                 case "add":
-                    addTask();
+                    tasks = addTask(tasks);
                     displayMainWindow();
                     break;
                 case "remove":
@@ -68,25 +68,21 @@ public class TaskManager {
         System.out.println();
     }
 
-    public static void addTask() {
+    public static String[][] addTask(String[][] array) {
         System.out.println("add");
-
         String[] task = new String[3];
         String description;
         String date;
         String isImportant;
-
-
         Scanner sc = new Scanner(System.in);
-
 
         while (true) {
             System.out.println("Please add task description. Please do not use comma");
             description = sc.nextLine();
             if (description != null && !description.matches(",")) {
+                task[0] = description;
                 break;
             }
-
         }
         while (true) {
             System.out.println("Please add task due date. Use format yyyy-mm-dd");
@@ -106,7 +102,11 @@ public class TaskManager {
                 break;
             }
         }
+        array = Arrays.copyOf(array, array.length +1);
+        array[array.length -1] = task;
+
         System.out.println(description + " " + date + " " + isImportant);
+        return array;
     }
 
     public static String[][] removeTask(String[][] array) {
