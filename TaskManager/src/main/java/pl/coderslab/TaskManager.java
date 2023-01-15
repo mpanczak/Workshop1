@@ -84,7 +84,7 @@ public class TaskManager {
         while (true) {
             System.out.println("Please add task description. Please do not use comma");
             description = sc.nextLine();
-            if (description != null && !description.matches(",")) {
+            if (description != null && !description.contains(",")) {
                 task[0] = description;
                 break;
             }
@@ -128,7 +128,7 @@ public class TaskManager {
                     break;
                 }
             }
-            System.out.println("Incorrect argument passed. Please give number grater or equeal 0");
+            System.out.println("Incorrect argument passed. Please give number grater or equal 0");
         }
 
         try {
