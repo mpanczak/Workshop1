@@ -69,16 +69,17 @@ public class TaskManager {
     }
 
     public static String[][] loadTasks() throws FileNotFoundException {
-        String[][] tasks = new String[2][4];
-        tasks[0][0] = "0 : ";
-        tasks[0][1] = "Task1 - important";
-        tasks[0][2] = "2020-03-09";
-        tasks[0][3] = "true";
-        tasks[1][0] = "1 : ";
-        tasks[1][1] = "Task to do";
-        tasks[1][2] = "2019-03-09";
-        tasks[1][3] = "true";
+        String[][] tasks = new String[0][];
+        int i = 0;
+        File taskDatabase = new File("tasks.csv");
+        Scanner sc = new Scanner(taskDatabase);
 
+        while (sc.hasNextLine()) {
+            tasks = Arrays.copyOf(tasks, tasks.length +1);
+            String line = sc.nextLine();
+            tasks[i] = line.split(", ");
+            i++;
+        }
 
         return tasks;
     }
