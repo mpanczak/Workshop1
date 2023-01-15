@@ -29,24 +29,25 @@ public class TaskManager {
         while (true) {
             String command = sc.nextLine();
             switch (command) {
-                case "add":
+                case "add" -> {
                     tasks = addTask(tasks);
                     displayMainWindow();
-                    break;
-                case "remove":
+                }
+                case "remove" -> {
                     tasks = removeTask(tasks);
                     displayMainWindow();
-                    break;
-                case "list":
+                }
+                case "list" -> {
                     displayTasks(tasks);
                     displayMainWindow();
-                    break;
-                case "exit":
+                }
+                case "exit" -> {
                     saveTasks(tasks);
                     System.out.println(ConsoleColors.RED + "Bye, bye." + ConsoleColors.RESET);
                     return;
-                default:
-                    System.out.println(ConsoleColors.BLUE + "Please select a correct option." + ConsoleColors.RESET);
+                }
+                default ->
+                        System.out.println(ConsoleColors.BLUE + "Please select a correct option." + ConsoleColors.RESET);
             }
 
         }
