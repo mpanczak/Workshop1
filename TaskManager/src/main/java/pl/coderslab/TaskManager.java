@@ -16,7 +16,9 @@ public class TaskManager {
             tasks = loadTasks();
         }
         catch (FileNotFoundException e) {
-            System.out.println(ConsoleColors.RED + "[Error] Failed to load data. The TaskManager application has been stopped." + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.RED
+                    + "[Error] Failed to load data. The TaskManager application has been stopped."
+                    + ConsoleColors.RESET);
             return;
         }
         displayMainWindow();
