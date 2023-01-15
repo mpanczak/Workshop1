@@ -1,6 +1,8 @@
 package pl.coderslab;
 
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -28,7 +30,7 @@ public class TaskManager {
                     displayMainWindow();
                     break;
                 case "remove":
-                    removeTask();
+                    tasks = removeTask(tasks);
                     displayMainWindow();
                     break;
                 case "list":
@@ -63,9 +65,22 @@ public class TaskManager {
         System.out.println("dodaaje taska");
     }
 
-    public static void removeTask() {
+    public static String[][] removeTask(String[][] array) {
         System.out.println("remove");
-        System.out.println("usuwa taska");
+        System.out.println("Please select number to remove");
+
+        Scanner sc = new Scanner(System.in);
+        int taskID = sc.nextInt();
+
+        try {
+            array = ArrayUtils.remove(array, taskID);
+            System.out.println("Value was successfully deleted.");
+
+        }
+        catch (IndexOutOfBoundsException e) {
+            System.out.println("The task with the given id was not found.");
+        }
+        return array;
     }
 
     public static String[][] loadTasks() throws FileNotFoundException {
