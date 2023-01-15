@@ -41,7 +41,7 @@ public class TaskManager {
                     System.out.println(ConsoleColors.RED + "Bye, bye." + ConsoleColors.RESET);
                     return;
                 default:
-                    displayMainWindow();
+                    System.out.println(ConsoleColors.BLUE + "Please select a correct option." + ConsoleColors.RESET);
             }
 
         }
