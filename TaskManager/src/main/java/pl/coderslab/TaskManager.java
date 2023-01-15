@@ -5,6 +5,8 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -40,6 +42,7 @@ public class TaskManager {
                     displayMainWindow();
                     break;
                 case "exit":
+                    saveTasks(tasks);
                     System.out.println(ConsoleColors.RED + "Bye, bye." + ConsoleColors.RESET);
                     return;
                 default:
@@ -142,8 +145,23 @@ public class TaskManager {
 
         return tasks;
     }
-    public static void saveTasks() {
-        System.out.println("Zapisuje taski");
+    public static void saveTasks(String[][] array) {
+        StringBuilder sb = new StringBuilder();
+
+        for (String[] strings : array) {
+            sb.append(strings[0]);
+            for (int j = 1; j < strings.length; j++) {
+                sb.append(", ").append(strings[j]);
+            }
+            sb.append("\n");
+        }
+        File file = new File("tasks.csv");
+        try {
+            Files.writeString(file.toPath(), sb.toString());
+        }
+        catch (IOException e) {
+            System.out.println(ConsoleColors.RED + "[Error] File saving problem." + ConsoleColors.RESET);
+        }
     }
 
 }
