@@ -54,8 +54,14 @@ public class TaskManager {
     }
     public static void displayTasks(String[][] tasks) {
         System.out.println("list");
+        if (tasks.length == 0) {
+            System.out.println("No tasks to do.");
+        }
+
         for (int i = 0; i < tasks.length; i++) {
-            System.out.println(tasks[i][0] + tasks[i][1] + " " + tasks[i][2] + " " + tasks[i][3]);
+            System.out.println(ConsoleColors.YELLOW
+                    + i + " : " + tasks[i][0] + " " + tasks[i][1] + " " + tasks[i][2]
+                    + ConsoleColors.RESET);
         }
         System.out.println();
     }
