@@ -2,6 +2,7 @@ package pl.coderslab;
 
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -118,7 +119,17 @@ public class TaskManager {
         System.out.println("Please select number to remove");
 
         Scanner sc = new Scanner(System.in);
-        int taskID = sc.nextInt();
+        int taskID;
+        while (true) {
+            String input = sc.nextLine();
+            if (NumberUtils.isParsable(input)) {
+                taskID = Integer.parseInt(input);
+                if (taskID >= 0){
+                    break;
+                }
+            }
+            System.out.println("Incorrect argument passed. Please give number grater or equeal 0");
+        }
 
         try {
             array = ArrayUtils.remove(array, taskID);
@@ -126,7 +137,7 @@ public class TaskManager {
 
         }
         catch (IndexOutOfBoundsException e) {
-            System.out.println("The task with the given id was not found.");
+            System.out.println("The task with the given ID was not found.");
         }
         return array;
     }
