@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static pl.coderslab.ConsoleColors.*;
+
 public class TaskManager {
     static String[][] tasks = new String[0][];
     public static void main(String[] args) {
@@ -19,9 +21,7 @@ public class TaskManager {
             loadTasks();
         }
         catch (FileNotFoundException e) {
-            System.out.println(ConsoleColors.RED
-                    + "[Error] Failed to load data. The TaskManager application has been stopped."
-                    + ConsoleColors.RESET);
+            System.out.println(RED + "[Error] Failed to load data. The TaskManager application has been stopped." + RESET);
             return;
         }
         displayMainWindow();
@@ -44,11 +44,11 @@ public class TaskManager {
                 }
                 case "exit" -> {
                     saveTasks();
-                    System.out.println(ConsoleColors.RED + "Bye, bye." + ConsoleColors.RESET);
+                    System.out.println(RED + "Bye, bye." + RESET);
                     return;
                 }
                 default ->
-                        System.out.println(ConsoleColors.BLUE + "Please select a correct option." + ConsoleColors.RESET);
+                        System.out.println(BLUE + "Please select a correct option." + RESET);
             }
 
         }
@@ -56,7 +56,7 @@ public class TaskManager {
     }
 
     public static void displayMainWindow() {
-        System.out.println(ConsoleColors.BLUE + "Please select an option:" + ConsoleColors.RESET);
+        System.out.println(BLUE + "Please select an option:" + RESET);
         System.out.println("add\nremove\nlist\nexit");
     }
     public static void displayTasks() {
@@ -66,9 +66,7 @@ public class TaskManager {
         }
 
         for (int i = 0; i < tasks.length; i++) {
-            System.out.println(ConsoleColors.YELLOW
-                    + i + " : " + tasks[i][0] + " " + tasks[i][1] + " " + tasks[i][2]
-                    + ConsoleColors.RESET);
+            System.out.println(YELLOW + i + " : " + tasks[i][0] + " " + tasks[i][1] + " " + tasks[i][2] + RESET);
         }
         System.out.println();
     }
@@ -167,7 +165,7 @@ public class TaskManager {
             Files.writeString(file.toPath(), sb.toString());
         }
         catch (IOException e) {
-            System.out.println(ConsoleColors.RED + "[Error] File saving problem." + ConsoleColors.RESET);
+            System.out.println(RED + "[Error] File saving problem." + RESET);
         }
     }
 
