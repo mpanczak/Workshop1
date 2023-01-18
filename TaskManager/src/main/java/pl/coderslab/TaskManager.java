@@ -92,7 +92,7 @@ public class TaskManager {
         while (true) {
             System.out.println("Please add task due date. Use format yyyy-mm-dd");
             date = sc.nextLine();
-            if (date != null && date.matches("\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])*")) {
+            if (date != null && date.matches("\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])*")) {
                 task[1] = date;
                 break;
             }
