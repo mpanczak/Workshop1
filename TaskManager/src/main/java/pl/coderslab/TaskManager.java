@@ -12,11 +12,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
+    static String[][] tasks = new String[0][];
     public static void main(String[] args) {
 
-        String[][] tasks;
         try {
-            tasks = loadTasks();
+            loadTasks();
         }
         catch (FileNotFoundException e) {
             System.out.println(ConsoleColors.RED
@@ -31,19 +31,19 @@ public class TaskManager {
             String command = sc.nextLine();
             switch (command) {
                 case "add" -> {
-                    tasks = addTask(tasks);
+                    addTask();
                     displayMainWindow();
                 }
                 case "remove" -> {
-                    tasks = removeTask(tasks);
+                    removeTask();
                     displayMainWindow();
                 }
                 case "list" -> {
-                    displayTasks(tasks);
+                    displayTasks();
                     displayMainWindow();
                 }
                 case "exit" -> {
-                    saveTasks(tasks);
+                    saveTasks();
                     System.out.println(ConsoleColors.RED + "Bye, bye." + ConsoleColors.RESET);
                     return;
                 }
@@ -59,7 +59,7 @@ public class TaskManager {
         System.out.println(ConsoleColors.BLUE + "Please select an option:" + ConsoleColors.RESET);
         System.out.println("add\nremove\nlist\nexit");
     }
-    public static void displayTasks(String[][] tasks) {
+    public static void displayTasks() {
         System.out.println("list");
         if (tasks.length == 0) {
             System.out.println("No tasks to do.");
@@ -73,7 +73,7 @@ public class TaskManager {
         System.out.println();
     }
 
-    public static String[][] addTask(String[][] array) {
+    public static void addTask() {
         System.out.println("add");
         String[] task = new String[3];
         String description;
@@ -107,14 +107,13 @@ public class TaskManager {
                 break;
             }
         }
-        array = Arrays.copyOf(array, array.length +1);
-        array[array.length -1] = task;
+        tasks = Arrays.copyOf(tasks, tasks.length +1);
+        tasks[tasks.length -1] = task;
 
         System.out.println(description + " " + date + " " + isImportant);
-        return array;
     }
 
-    public static String[][] removeTask(String[][] array) {
+    public static void removeTask() {
         System.out.println("remove");
         System.out.println("Please select number to remove");
 
@@ -132,18 +131,16 @@ public class TaskManager {
         }
 
         try {
-            array = ArrayUtils.remove(array, taskID);
+            tasks = ArrayUtils.remove(tasks, taskID);
             System.out.println("Value was successfully deleted.");
 
         }
         catch (IndexOutOfBoundsException e) {
             System.out.println("The task with the given ID was not found.");
         }
-        return array;
     }
 
-    public static String[][] loadTasks() throws FileNotFoundException {
-        String[][] tasks = new String[0][];
+    public static void loadTasks() throws FileNotFoundException {
         int i = 0;
         File taskDatabase = new File("tasks.csv");
         Scanner sc = new Scanner(taskDatabase);
@@ -154,13 +151,11 @@ public class TaskManager {
             tasks[i] = line.split(", ");
             i++;
         }
-
-        return tasks;
     }
-    public static void saveTasks(String[][] array) {
+    public static void saveTasks() {
         StringBuilder sb = new StringBuilder();
 
-        for (String[] strings : array) {
+        for (String[] strings : tasks) {
             sb.append(strings[0]);
             for (int j = 1; j < strings.length; j++) {
                 sb.append(", ").append(strings[j]);
